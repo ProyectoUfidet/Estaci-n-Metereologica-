@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://www.luisllamas.es/arduino-lluvia/ -->
+<html lang="es" data-theme="dark"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes"><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"><title>Detector de lluvia con Arduino y sensor FC-37 o YL-83</title><meta name="description" content="En esta entrada aprendemos a detectar lluvia con Arduino y el uso del sensor de agua FC-37 o YL-83"><link rel="canonical" href="https://www.luisllamas.es/arduino-lluvia/"><link rel="alternate" href="https://www.luisllamas.es/arduino-lluvia/" hreflang="es"><link rel="alternate" href="https://www.luisllamas.es/en/arduino-rain/" hreflang="en"><link rel="preload" href="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/critical-10.0.0.css" as="style"><link rel="stylesheet" href="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/critical-10.0.0.css"><link rel="stylesheet" href="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/main-10.0.0.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/main-10.0.0.css"></noscript><link rel="stylesheet" href="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/mainarticle-10.0.0.css"><script>
+			const theme_current = localStorage.getItem('mode') || 'dark';
+			document.documentElement.setAttribute("data-theme", theme_current);
+		</script><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://www.luisllamas.es/#person","name":"Luis Llamas","url":"https://www.luisllamas.es/","image":"https://www.luisllamas.es/img/lll-icon.png"},{"@type":"WebSite","@id":"https://www.luisllamas.es/#website","url":"https://www.luisllamas.es/","name":"Luis Llamas","description":"Cursos y artículos sobre programación, electrónica, informática e ingeniería.","publisher":{"@id":"https://www.luisllamas.es/#person"},"inLanguage":"es"},{"@type":"BreadcrumbList","@id":"https://www.luisllamas.es/arduino-lluvia/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://www.luisllamas.es/"},{"@type":"ListItem","position":2,"name":"Cursos","item":"https://www.luisllamas.es/cursos/"},{"@type":"ListItem","position":3,"name":"Arduino y dipositivos","item":"https://www.luisllamas.es/curso-arduino-intermedio/"}]},{"@type":"Article","@id":"https://www.luisllamas.es/arduino-lluvia/#article","mainEntityOfPage":"https://www.luisllamas.es/arduino-lluvia/","headline":"Detector de lluvia con Arduino y sensor FC-37 o YL-83","description":"En esta entrada aprendemos a detectar lluvia con Arduino y el uso del sensor de agua FC-37 o YL-83","image":"https://www.luisllamas.es/images/socials/arduino-lluvia.webp","thumbnailUrl":"https://www.luisllamas.es/images/socials/arduino-lluvia.webp","datePublished":"2016-02-13T19:19:03.000Z","dateModified":"2016-02-13T19:19:03.000Z","author":{"@id":"https://www.luisllamas.es/#person"},"publisher":{"@id":"https://www.luisllamas.es/#person"},"articleSection":"Arduino y dipositivos","wordCount":838,"inLanguage":"es"}]}</script><meta name="author" content="Luis Llamas"><meta name="view-transition" content="same-origin"><meta property="og:type" content="article"><meta property="og:site_name" content="Luis Llamas"><meta property="og:url" content="https://www.luisllamas.es/arduino-lluvia/"><meta property="og:title" content="Detector de lluvia con Arduino y sensor FC-37 o YL-83"><meta property="og:description" content="En esta entrada aprendemos a detectar lluvia con Arduino y el uso del sensor de agua FC-37 o YL-83"><meta property="og:image" content="https://www.luisllamas.es/images/socials/arduino-lluvia.webp"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@luisllamas"><meta name="twitter:url" content="https://www.luisllamas.es/arduino-lluvia/"><meta name="twitter:title" content="Detector de lluvia con Arduino y sensor FC-37 o YL-83"><meta name="twitter:description" content="En esta entrada aprendemos a detectar lluvia con Arduino y el uso del sensor de agua FC-37 o YL-83"><meta name="twitter:image" content="https://www.luisllamas.es/images/socials/arduino-lluvia.webp"><link rel="icon" type="image/x-icon" href="https://www.luisllamas.es/favicon.ico"><link rel="icon" type="image/png" sizes="32x32" href="https://www.luisllamas.es/img/favicon_32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://www.luisllamas.es/img/favicon_16.png"><script src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/analytics-2.0.0.js.descarga" data-key="sAx+e6aaHiB307qrQn+I4w" data-api="https://analytics.ahrefs.com/api/event" async=""></script><link rel="modulepreload" href="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/lll-ui-related-ZZBOGQFC.js.descarga"><script type="module" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/lll-ui-related-ZZBOGQFC.js.descarga"></script><link rel="stylesheet" href="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/lll-ui-styles-1.5.0.css"></head> <body data-pos="top">  <header itemscope="" itemtype="https://schema.org/WPHeader"> <div class="site-header"> <div class="site-header-inner"> <div class="toplogo-container" itemscope="" itemtype="https://schema.org/Organization"> <img alt="LuisLlamas Logo" height="38" width="38" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/lll_icon_v2_64x64.png"> <a href="https://www.luisllamas.es/" itemprop="url"> <p itemprop="name">Luis Llamas</p> <!-- <p itemprop="description">Ingeniería, informática y diseño</p> --> </a> </div> <div class="site-header-inner-group"> <button class="search-button" title="search"> <svg role="img" class="icon"><use href="/img/icon_globals_v6.0.0.svg#search"></use></svg> <span>Ctrl + k</span> </button> <nav class="mainnav" itemscope="" itemtype="https://schema.org/SiteNavigationElement"> <ul> <li><a href="https://www.luisllamas.es/">Inicio</a></li> <li><a href="https://www.luisllamas.es/cursos/">Cursos</a></li> <li><span>Playground</span> <ul> <li><a href="https://www.luisllamas.es/playgrounds/">Interactivos</a></li> <li><a href="https://www.luisllamas.es/aprende-desde-cero/">Desde cero</a></li> <li><a href="https://www.luisllamas.es/cheatsheets/">CheatSheets</a></li> <li><a href="https://www.luisllamas.es/quizs/">Quizs</a></li> </ul> </li> <li><span>Secciones</span> <ul> <li><a href="https://www.luisllamas.es/tutoriales-arduino/">Arduino</a></li> <li><a href="https://www.luisllamas.es/curso-esp8266-esp32/">ESP32</a></li> <li><a href="https://www.luisllamas.es/curso-raspberry-pi/">Linux</a></li> <li><a href="https://www.luisllamas.es/curso-impresion-3d/">Impresión 3D</a></li> <li><a href="https://www.luisllamas.es/curso-electronica/">Electrónica</a></li> <li><a href="https://www.luisllamas.es/renders/">Portfolio 3D</a></li> </ul> </li> <li><a href="https://www.luisllamas.es/articulos/">Artículos</a></li> <!-- <li><a href="/contacto/">Contacto</a></li>  --> </ul> </nav> </div> <div class="topbar topbar-settings"> <div class="topbar-inner"> <button class="theme-toggle button-link" aria-label="theme-toggle"> <span class="light"><svg class="icon"><use href="/img/icon_globals_v6.0.0.svg#sun"></use></svg></span> <span class="dark"><svg class="icon"><use href="/img/icon_globals_v6.0.0.svg#moon"></use></svg></span> </button> <div class="language-selector activable"> <div> <svg role="img" class="icon"> <use href="/img/icon_globals_v6.0.0.svg#translate"></use> </svg> <!-- <span>ES</span> --> </div> <ul> <li><a href="https://www.luisllamas.es/arduino-lluvia/">Español</a></li> <li><a href="https://www.luisllamas.es/en/arduino-rain/">Inglés</a></li> </ul> </div> </div> </div> <div class="top-social"> <a href="https://github.com/luisllamasbinaburo/" title="github" class="social-icon github" rel="author"> <svg role="img" class="social-svg"> <use href="/img/icon_globals_v6.0.0.svg#github"></use> </svg> </a> <!-- <a href="https://bsky.app/profile/luisllamas.bsky.social" title="Blusky" class="social-icon blusky" rel="author">
+        <svg role="img" class="social-svg">
+          <use href="/img/icon_globals_v6.0.0.svg#blusky"></use>
+        </svg>
+      </a> --> <!-- <a href="https://twitter.com/LuisLlamas/" title="twitter" class="social-icon twitter" rel="author">
+		<svg role="img" class="social-svg">
+			<use href="/img/icon_globals_v6.0.0.svg#twitter"></use>
+		</svg>
+	</a> --> <!-- <a href="https://www.linkedin.com/in/luisllamasbinaburo/" title="linkedin" class="social-icon linkedin" rel="author">
+		<svg role="img" class="social-svg">
+			<use href="/img/icon_globals_v6.0.0.svg#linkedin"></use>
+		</svg>
+	</a> --> <a href="https://discord.com/invite/mSGV5hnxtK/" title="discord-link" rel="author" class="social-icon discord"> <svg role="img" class="social-svg"> <use href="/img/icon_globals_v6.0.0.svg#discord"></use> </svg> </a> <!-- <a href="https://www.youtube.com/c/LuisllamasEs/" title="youtube" class="social-icon youtube" rel="author">
+		<svg role="img" class="social-svg">
+			<use href="/img/icon_globals_v6.0.0.svg#youtube"></use>
+		</svg>
+	</a> --> </div> <button class="mobile-button" type="button" aria-label="button-menu"> <span class="mobile-buttonspan"></span> </button> </div> </div> </header> <main class="page">   <div class="row with-left"> <aside class="sidebar-left" data-sticky="true" data-top-gap="60px" itemscope="" itemtype="https://schema.org/WPSideBar" style="position: sticky; top: 60px; height: fit-content;"> <meta itemprop="name" content="Sidebar"> <div class="sidebarmobile-top"> <a class="button-link" href="https://www.luisllamas.es/"> <svg role="img" class="icon stroke"><use href="/img/icon_globals_v6.0.0.svg#home"></use></svg> <span>Inicio</span> </a> <div> <div class="language-selector activable button-link"> <svg role="img" class="icon"> <use href="/img/icon_globals_v6.0.0.svg#translate"></use> </svg> <ul> <li><a href="https://www.luisllamas.es/arduino-lluvia/">Español</a></li> <li><a href="https://www.luisllamas.es/en/arduino-rain/">Inglés</a></li> </ul> </div> <button class="theme-toggle button-link" aria-label="theme-toggle"> <span class="light"><svg class="icon"><use href="/img/icon_globals_v6.0.0.svg#sun"></use></svg></span> <span class="dark"><svg class="icon"><use href="/img/icon_globals_v6.0.0.svg#moon"></use></svg></span> </button> </div> </div> <!-- <SidebarSocial></SidebarSocial>
+
+<div class="m-only l-only sidebard-discord">
+	<SidebarDiscord></SidebarDiscord>
+</div> --> <div class="sidebar-widget sidebarmobile-toc">  <div>  <p>En esta página</p> </div>   <div class="toc mobile activable"> <div> <div> <svg role="img" class="social-svg"> <use href="/img/icon_globals_v6.0.0.svg#toc"></use> </svg> </div> <span class="current-heading">¿Qué es un sensor de lluvia?</span> </div> <ul> <li> <a href="https://www.luisllamas.es/arduino-lluvia/#qu%C3%A9-es-un-sensor-de-lluvia" class="active">¿Qué es un sensor de lluvia?</a> <ul>  </ul> </li><li> <a href="https://www.luisllamas.es/arduino-lluvia/#precio" class="">Precio</a> <ul>  </ul> </li><li> <a href="https://www.luisllamas.es/arduino-lluvia/#esquema-montaje" class="">Esquema montaje</a> <ul>  </ul> </li><li> <a href="https://www.luisllamas.es/arduino-lluvia/#ejemplos-de-c%C3%B3digo" class="">Ejemplos de código</a> <ul>  </ul> </li><li> <a href="https://www.luisllamas.es/arduino-lluvia/#descarga-el-c%C3%B3digo" class="">Descarga el código</a> <ul>  </ul> </li> </ul> </div>  </div> <div class="sidebar-widget sidebar-navigation activable"> <svg role="img" class="icon"> <use href="/img/icon_globals_v6.0.0.svg#list"></use> </svg> <p>Secciones</p> <ul class="sidebarnavigation highlight-links" itemscope="" itemtype="https://schema.org/SiteNavigationElement"> <li class="underline"> <a href="https://www.luisllamas.es/cursos/" title="Ir a Cursos" rel="bookmark"> <img alt="" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/book-icon.svg" height="24" width="24" itemprop="image" loading="lazy"> Cursos </a> </li><li> <a href="https://www.luisllamas.es/articulos/" title="Ir a Artículos" rel="bookmark"> <img alt="" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/electronic-icon.svg" height="24" width="24" itemprop="image" loading="lazy"> Artículos </a> </li><li> <a href="https://www.luisllamas.es/tutoriales-arduino/" title="Ir a Arduino" rel="bookmark"> <img alt="" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/arduino-icon.svg" height="24" width="24" itemprop="image" loading="lazy"> Arduino </a> </li><li class="underline"> <a href="https://www.luisllamas.es/curso-esp8266-esp32/" title="Ir a ESP32" rel="bookmark"> <img alt="" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/espressif-icon.svg" height="24" width="24" itemprop="image" loading="lazy"> ESP32 </a> </li><li class="underline"> <a href="https://www.luisllamas.es/curso-raspberry-pi/" title="Ir a Raspberry Pi / Linux" rel="bookmark"> <img alt="" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/rpi-icon.svg" height="24" width="24" itemprop="image" loading="lazy"> Raspberry Pi / Linux </a> </li><li> <a href="https://www.luisllamas.es/curso-impresion-3d/" title="Ir a Impresión 3D" rel="bookmark"> <img alt="" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/3dprinter-icon.svg" height="24" width="24" itemprop="image" loading="lazy"> Impresión 3D </a> </li><li> <a href="https://www.luisllamas.es/curso-electronica/" title="Ir a Electrónica" rel="bookmark"> <img alt="" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/pcb-icon.svg" height="24" width="24" itemprop="image" loading="lazy"> Electrónica </a> </li> </ul> </div> <div class="sidebar-widget over-hidden sidebar-outline"> <a href="https://www.luisllamas.es/curso-arduino-intermedio/">  <img src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/arduino-dispositivos-icon.svg" height="24" width="24" itemprop="image" loading="lazy"> <p>Arduino y dipositivos</p> </a>  <a class="outline-home" href="https://www.luisllamas.es/curso-arduino-intermedio/"> <svg role="img"><use href="/img/icon_globals_v6.0.0.svg#home"></use></svg>
+Ir al índice
+</a> <div> <ul class="outline" itemscope="" itemtype="https://schema.org/SiteNavigationElement"> <li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Entradas y salidas</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/arduino-level-shifter/"> Adaptación de nivel 3V3 - 5V </a></li><li class="medium"><a href="https://www.luisllamas.es/usar-un-optointerruptor-con-arduino/"> Optointerruptor </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-encoder-rotativo/"> Encoder rotativo </a></li><li class="medium"><a href="https://www.luisllamas.es/como-usar-extensor-i2c-tca9548a-y-arduino/"> Extensor I2C TCA9548A </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-mosfet-irf520n/"> Mosfet IRF520N </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-salida-rele/"> Salida relé </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-rele-estado-solido-ssr/"> Salida relé sólido </a></li><li class="medium"><a href="https://www.luisllamas.es/mas-salidas-y-entradas-en-arduino-con-multiplexor-cd74hc4067/"> Multiplexor CD74HC4067 </a></li><li class="medium"><a href="https://www.luisllamas.es/mas-pines-digitales-con-arduino-y-el-expansor-es-i2c-pcf8574/"> Extensor I2C PCF8574 </a></li><li class="medium"><a href="https://www.luisllamas.es/como-controlar-hasta-16-gpio-por-i2c-con-extensor-pcf8575-y-arduino/"> Extensor I2C PCF8575 </a></li><li class="medium"><a href="https://www.luisllamas.es/entrada-analogica-adc-de-16-bits-con-arduino-y-ads1115/"> ADC I2C ADS1115 </a></li><li class="medium"><a href="https://www.luisllamas.es/salida-analogica-real-con-arduino-y-dac-de-12bits-mcp4725/"> DAC I2C MCP4725 </a></li><li class="medium"><a href="https://www.luisllamas.es/resistencia-variable-con-arduino-y-digipot-mcp41xxx/"> Digipot MCP41xxx </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Motores</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/controlar-un-servo-con-arduino/"> Servos </a></li><li class="medium"><a href="https://www.luisllamas.es/controlar-un-servo-de-rotacion-continua-con-arduino/"> Servo rotación continua </a></li><li class="medium"><a href="https://www.luisllamas.es/controlar-16-servos-o-16-salidas-pwm-en-arduino-con-pca9685/"> Controlador PCA9685 </a></li><li class="medium"><a href="https://www.luisllamas.es/hasta-32-de-servos-en-arduino-con-el-controlador-usc-32/"> Controlador 32 servos </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-motor-corriente-continua-l298n/"> Motor DC y L298N </a></li><li class="medium"><a href="https://www.luisllamas.es/controla-motores-de-gran-potencia-con-arduino-y-bts7960/"> Motor DC y BTS7960 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-motor-dc-tb6612fng/"> Motor DC y TB6612FNG </a></li><li class="medium"><a href="https://www.luisllamas.es/motores-paso-paso-arduino-driver-a4988-drv8825/"> Motor paso a paso A4988 DRV8825 </a></li><li class="medium"><a href="https://www.luisllamas.es/motor-paso-paso-28byj-48-arduino-driver-uln2003/"> Motor paso a paso 28BYJ-48 </a></li><li class="medium"><a href="https://www.luisllamas.es/motores-paso-a-paso-en-silencio-con-arduino-y-los-driver-tmc2100-tmc2130-y-tmc2208/"> Motor paso a paso y TMCxxx </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Actuadores</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/arduino-actuador-lineal/"> Actuador lineal </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-actuador-electromagnetico/"> Actuador electromagnético </a></li><li class="medium"><a href="https://www.luisllamas.es/diodo-laser-arduino/"> Diodo láser </a></li><li class="medium"><a href="https://www.luisllamas.es/electroiman-arduino/"> Electroiman </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-peltier/"> Placa Peltier </a></li><li class="medium"><a href="https://www.luisllamas.es/controlar-un-ventilador-con-arduino/"> Ventilador </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Optico</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/medir-nivel-luz-con-arduino-y-fotoresistencia-ldr/"> Fotoresistencia LDR </a></li><li class="medium"><a href="https://www.luisllamas.es/medir-cantidad-de-luxes-con-arduino-y-el-luxometro-bh1750/"> Luxómetro BH1750 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-detector-lineas-tcrt5000l/"> Detector lineas TCRT5000l </a></li><li class="medium"><a href="https://www.luisllamas.es/detector-llama-arduino/"> Detector llama </a></li><li class="medium"><a href="https://www.luisllamas.es/medir-color-arduino-colorimetro-tcs3200/"> Sensor color TCS3200 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-sensor-color-rgb-tcs34725/"> Sensor color TCS34725 </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Distancia</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/medir-distancia-con-arduino-y-sensor-de-ultrasonidos-hc-sr04/"> Sensor ultrasonidos HC-SR04 </a></li><li class="medium"><a href="https://www.luisllamas.es/detectar-obstaculos-con-sensor-infrarrojo-y-arduino/"> Detector obtaculos infrarrojo </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-sharp-gp2y0a02yk0f/"> Sensor IR Sharp GP2Y0A02YK0F </a></li><li class="medium"><a href="https://www.luisllamas.es/medir-distancia-con-arduino-y-el-sensor-gp2y0e03/"> Sensor IR Sharp GP2Y0E03 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-sensor-distancia-vl53l0x/"> Sensor TOF VL53l0x </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Inercial</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/medir-inclinacion-con-arduino-y-sensor-tilt-sw-520d/"> Inclinación SW-520D </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-acelerometro-adxl345/"> Acelerómetro ADXL345 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-acelerometro-mma7455/"> Acelerómetro MMA7455 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-orientacion-imu-mpu-6050/"> IMU MPU6050 </a></li><li class="medium"><a href="https://www.luisllamas.es/brujula-magnetica-con-arduino-compass-digital-hmc5883/"> Brújula HMC5883 </a></li><li class="medium"><a href="https://www.luisllamas.es/usar-arduino-con-los-imu-de-9dof-mpu-9150-y-mpu-9250/"> IMU MPU9150 / MPU9250 </a></li><li class="medium"><a href="https://www.luisllamas.es/usar-arduino-y-el-imu-9-ejes-l3gd20-lsm303d/"> IMU L3GD20 + LSM303D </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Movimiento</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/medir-vibracion-con-arduino-y-sensor-sw-18020p/"> Vibración SW-18020P </a></li><li class="medium"><a href="https://www.luisllamas.es/detector-de-movimiento-con-arduino-y-sensor-pir/"> Sensor movimiento PIR </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-detector-movimiento-rcwl-0516/"> Radar RCWL-0516 </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Tactil / Gestos</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/interruptor-touchless-con-arduino-y-sensor-capacitivo/"> Sensor táctil </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-mpr121/"> 12 sensores táciles MPR121 </a></li><li class="medium"><a href="https://www.luisllamas.es/detectar-gestos-con-arduino-y-sensor-apds-9960/"> Sensor gestos APDS-9960 </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Ambiental</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/medir-temperatura-con-arduino-y-termistor-mf52/"> Termperatura MF52 </a></li><li class="medium"><a href="https://www.luisllamas.es/medir-temperatura-con-arduino-y-sensor-lm35/"> Temperatura LM35 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-dht11-dht22/"> Temp. y humedad DHT11 / DHT22 </a></li><li class="medium"><a href="https://www.luisllamas.es/usar-el-sensor-de-temperatura-interno-de-arduino/"> Sensor temperatura interno </a></li><li class="medium"><a href="https://www.luisllamas.es/medir-presion-del-aire-y-altitud-con-arduino-y-barometro-bmp180/"> Temp. y presión BMP180 </a></li><li class="medium"><a href="https://www.luisllamas.es/medir-temperatura-y-presion-barometrica-con-arduino-y-bmp280/"> Temp. y presión BMP280 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-y-el-termometro-infrarrojo-a-distancia-mlx90614/"> Temp. distancia MLX90614 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-detector-gas-mq/"> Sensor GAS MQxx </a></li><li class="medium"><a href="https://www.luisllamas.es/sensor-ambiental-arduino-bme280/"> Sensor ambiental BME280 </a></li><li class="medium"><a href="https://www.luisllamas.es/sensor-de-calidad-ambiental-con-arduino-y-bme680/"> Sensor ambiental BME680 </a></li><li class="medium"><a href="https://www.luisllamas.es/medir-calidad-del-aire-y-co2-con-ccs811-y-arduino/"> Calidad aire CCS811 </a></li> </ul> </li><li data-group="t_outline" class="outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Agua / Liquidos</span> </div> <ul class="outline-submenu"> <li class="medium active"><a href="https://www.luisllamas.es/arduino-lluvia/"> Sensor lluvia </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-humedad-suelo-fc-28/"> Sensor humedad suelo FC-28 </a></li><li class="medium"><a href="https://www.luisllamas.es/sensor-de-humedad-del-suelo-capacitivo-y-arduino/"> Sensor humedad suelo capacitivo </a></li><li class="medium"><a href="https://www.luisllamas.es/temperatura-liquidos-arduino-ds18b20/"> Sensor temperatura DS18B20 </a></li><li class="medium"><a href="https://www.luisllamas.es/caudal-consumo-de-agua-con-arduino-y-caudalimetro/"> Caudalímetro </a></li><li class="medium"><a href="https://www.luisllamas.es/bomba-de-agua-con-arduino/"> Bomba de agua </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Intensidad / Tension</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/medir-tension-intensidad-y-potencia-con-arduino-y-ina219/"> Intensidad INA219 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-intensidad-consumo-electrico-acs712/"> Intensidad ACS712 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-sensor-corriente-sct-013/"> Corriente alterna SCT-013 </a></li><li class="medium"><a href="https://www.luisllamas.es/medir-voltajes-de-hasta-25v-con-arduino-y-fz0430/"> Tensión &lt;25V con FZ0430 </a></li><li class="medium"><a href="https://www.luisllamas.es/medir-tensiones-de-220v-230v-con-arduino-y-transformador/"> Tensión alterna 220/230V </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-cruce-por-cero-h11aa1/"> Sensor cruce cero H11AA1 </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Display</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/matriz-led-arduino-max7219/"> Matriz LED MAX7219 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-lcd-hitachi-hd44780/"> LCD Hitachi HD44780 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-lcd-i2c/"> LCD Hitachi I2C </a></li><li class="medium"><a href="https://www.luisllamas.es/conectar-arduino-a-un-display-lcd-nokia-5110/"> LCD Nokia 5110 </a></li><li class="medium"><a href="https://www.luisllamas.es/conectar-arduino-a-una-pantalla-oled-de-0-96/"> Oled 0.96 </a></li><li class="medium"><a href="https://www.luisllamas.es/conectar-arduino-a-una-pantalla-tft/"> Pantallas TFT </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-led-rgb-ws2812b/"> Neopixel (LED RGB WS2812b) </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Comunicacion</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/conectar-arduino-por-bluetooth-con-los-modulos-hc-05-o-hc-06/"> Modulo Bluetooth HC-05 / HC-06 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-ethernet-shield-w5100/"> Módulo Ethernet W5100 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-ethernet-enc28j60/"> Módulo Ethernet ENC28J60 </a></li><li class="medium"><a href="https://www.luisllamas.es/comunicacion-inalambrica-en-arduino-con-modulos-rf-433mhz/"> Módulo RF 433Mhz </a></li><li class="medium"><a href="https://www.luisllamas.es/comunicacion-inalambrica-a-2-4ghz-con-arduino-y-nrf24l01/"> Módulo RF.4Ghz NRF24101 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-rs485-max485/"> RS485 - Max 485 </a></li><li class="medium"><a href="https://www.luisllamas.es/comunicacion-rf-385-433-y-815mhz-con-arduino-y-cc1101/"> Módulo RF CC1101 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-wifi-esp8266-esp01/"> Wi-FI con ESP8266 ESP01 </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Controles</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/arduino-teclado-matricial/"> Teclado matricial </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-joystick/"> Joystick analógico </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-mando-a-distancia-infrarrojo/"> Mando infrarrojo </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-y-mando-a-distancia-de-4-canales-315mhz-ic2262/"> Mando a distancia 315Mhz </a></li><li class="medium"><a href="https://www.luisllamas.es/conectar-emisora-radio-control-con-arduino/"> Emisora radio control </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-mando-wii-wiichuck/"> Wii-chuck </a></li><li class="medium"><a href="https://www.luisllamas.es/controla-arduino-con-el-mando-inalambrico-de-la-ps2/"> Mando PS2 </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Magnetico</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/usar-un-interruptor-magnetico-con-arduino-magnetic-reed/"> Interruptor magnetic reed </a></li><li class="medium"><a href="https://www.luisllamas.es/medir-campos-magneticos-arduino-hall-49e/"> Sensor Hall 49E </a></li><li class="medium"><a href="https://www.luisllamas.es/detectar-campos-magneticos-con-arduino-y-sensor-hall-a3144/"> Sensor Hall A3144 </a></li><li class="medium"><a href="https://www.luisllamas.es/detector-de-metales-con-arduino-y-sensor-inductivo/"> Sensor metales inductivo </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Memoria</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/arduino-eeprom-externa-i2c-at24c256/"> Eeprom I2C AT24C256 </a></li><li class="medium"><a href="https://www.luisllamas.es/tarjeta-micro-sd-arduino/"> Lector Micro SD </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Tiempo</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/reloj-y-calendario-en-arduino-con-los-rtc-ds1307-y-ds3231/"> Reloj RTC DS1307 / DS3231 </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>RFID / NFC</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/arduino-rfid-mifare-rc522/"> RFID Mifare RC522 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-nfc-pn532/"> NFC PN532 </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Biometrico</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/lector-de-huellas-dactilares-con-arduino-y-sensor-fpm10a/"> Lector huellas FPM10A </a></li><li class="medium"><a href="https://www.luisllamas.es/pulsimetro-y-oximetro-con-arduino-y-max30102/"> Oxímetro MAX30102 </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Sonido</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/reproducir-sonidos-arduino-buzzer-pasivo-altavoz/"> Buzzer pasivo </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-buzzer-activo/"> Buzzer activo </a></li><li class="medium"><a href="https://www.luisllamas.es/detectar-sonido-con-arduino-y-microfono-ky-038/"> Micrófono KY-038 </a></li><li class="medium"><a href="https://www.luisllamas.es/medir-sonido-con-arduino-y-microfono-amplificado-max9812/"> Amplificador MAX9812 </a></li><li class="medium"><a href="https://www.luisllamas.es/arduino-mp3-dfplayer-mini/"> MP3 DFPlayer mini </a></li> </ul> </li><li data-group="t_outline" class="active outline-item activable toggleable"> <div> <div class="icon-item" style="--icon:url(/img/icon/actuator.svg)"></div> <span>Gps</span> </div> <ul class="outline-submenu"> <li class="medium"><a href="https://www.luisllamas.es/localizacion-gps-con-arduino-y-los-modulos-gps-neo-6/"> Módulo GPS Neo 6 </a></li> </ul> </li> </ul> </div>  </div> <div class="sidebar-widget over-hidden sidebar-related">  <div> <svg class="icon" role="img"><use href="/img/icon_globals_v6.0.0.svg#related"></use></svg> <p>Relacionado</p> </div>   <ul class="sidebarrelated highlight-links" itemscope="" itemtype="http://schema.org/ItemList"> <li> <a itemprop="url" href="https://www.luisllamas.es/curso-arduino-iniciacion/"> <img alt="curso-arduino-iniciacion" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/arduino-icon.svg" height="24" width="24" aria-label="curso-arduino-iniciacion" itemprop="image" loading="lazy"> Curso iniciación Arduino </a> </li><li> <a itemprop="url" href="https://www.luisllamas.es/curso-arduino-avanzado/"> <img alt="curso-arduino-avanzado" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/arduino-icon.svg" height="24" width="24" aria-label="curso-arduino-avanzado" itemprop="image" loading="lazy"> Curso Arduino avanzado </a> </li> </ul>  </div> <!-- <a href="/contacto/" title="Ir a contacto" rel="bookmark">✉️ Contacto</a> --> </aside> <div class="rowcontent with-right">  <article itemscope="" itemtype="https://schema.org/Article"> <div class="article-topbar"> <nav class="breadcumbs" aria-label="breadcumbs"> <ul> <li> <a href="https://www.luisllamas.es/"> <svg class="icon" role="img"><use href="/img/icon_globals_v6.0.0.svg#home"></use></svg> Inicio </a> </li><li> <a href="https://www.luisllamas.es/cursos/">  Cursos </a> </li><li> <a href="https://www.luisllamas.es/curso-arduino-intermedio/">  Arduino y dipositivos </a> </li> </ul> </nav> <nav class="top-navnextprev" aria-label="botones siguiente y anterior"> <a href="https://www.luisllamas.es/medir-calidad-del-aire-y-co2-con-ccs811-y-arduino/" title="Medir calidad del aire y CO2 con CCS811 y Arduino"> <svg style="transform: rotate(180deg)" class="icon" role="img"><use href="/img/icon_globals_v6.0.0.svg#chevron"></use></svg> <span>Anterior</span> </a> <a class="top-navnext" href="https://www.luisllamas.es/arduino-humedad-suelo-fc-28/" title="Medir la humedad del suelo con Arduino e higrómetro FC-28"> <span>Siguiente</span> <svg class="icon" role="img"><use href="/img/icon_globals_v6.0.0.svg#chevron"></use></svg> </a> </nav> </div> <header class="articleheader"> <img itemprop="image" aria-label="portada" width="400" height="266" alt="arduino-lluvia" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/arduino-sensor-lluvia.webp"> <h1 itemprop="headline">Detector de lluvia con Arduino y sensor FC-37 o YL-83</h1> <ul class="articleheader-meta" aria-label="información articulo">  <li class="articleheader-meta--time"> <svg class="icon" role="img"><use href="/img/icon_globals_v6.0.0.svg#clock"></use></svg> <span>5 min</span> </li> <li> <div class="articleheader-meta--dificulty"> <div class="signal-icon medium" title="Intermedio"> <div class="signal-bar"></div> <div class="signal-bar"></div> <div class="signal-bar"></div> </div> <span class="articlemeta-difficulty medium">Intermedio</span> </div> </li> </ul> </header> <div class="articlecontent" itemprop="articleBody"> <h2 id="qué-es-un-sensor-de-lluvia">¿Qué es un sensor de lluvia?</h2>
+<p>Este tipo de sensores <strong>detectan la presencia de lluvia por la variación de conductividad</strong> del sensor al entrar en contacto con el agua. Existen varios modelos de sensores similares, como el FC-37 y el YL-83.</p>
+<p>Constructivamente son sensores sencillos. Se dispone de dos contactos, unidos a unas pistas conductoras entrelazadas entre sí a una pequeña distancia, sin existir contacto entre ambas. Al depositarse agua sobre la superficie, se pone en contacto eléctrico ambos conductores, lo que puede ser detectado por un sensor.</p>
+<p>Ambos modelos se envían con una placa de medición estándar con el comparador LM393, que permite obtener la lectura tanto <strong>como un valor analógico como de forma digital</strong> cuando se supera un cierto umbral, que se regula a través de un potenciómetro ubicado en la propia placa.</p>
+<p>Los valores analógicos medidos <strong>varían desde 0 para una placa totalmente empapada, a 1023 para una placa totalmente seca</strong>.</p>
+<p>La salida digital dispara cuando el valor de humedad supera un cierto valor, que ajustamos mediante el potenciómetro. Por tanto, <strong>obtendremos una señal LOW en ausencia de lluvia, y HIGH con presencia de lluvia</strong>.</p>
+<p>En el caso del sensor de lluvia la señal analógica carece de interés, ya que el sensor <strong>no dispone de la precisión necesaria para medir la cantidad de agua acumulada</strong>. En cualquier caso, sería difícil extrapolar la medición a un valor de litros hora. Es decir, no podemos medir la cantidad de lluvia, solo su presencia.</p>
+<p>El sensor de lluvia puede ser empleado, por ejemplo, para extender un toldo o activar algún otro mecanismo, hacer sonar una alarma, o registrar la cantidad de tiempo (días, horas) en el que se producen precipitaciones en una determinada zona.</p>
+<p>El sensor de lluvia también puede ser empleado para detectar inundaciones, colocándolo en el suelo de un sótano o sala de calderas, por ejemplo. También puede ser útil para detectar cuando el agua de un depósito sobrepasa un determinado nivel.</p>
+<div class="lll-box lll-yellow lll-warning"><div class="lll-box-content"><p>Al usar el sensor en presencia de agua, aseguraros de <strong>proteger los contactos y partes eléctricas del circuito</strong>, y exponiendo únicamente la placa sensora. De lo contrario podéis provocar un cortocircuito, y dañar alguno de los componentes eléctricos.</p></div></div>
+<h2 id="precio">Precio</h2>
+<p>Los sensores de lluvia son realmente baratos. Podemos encontrar un sensor de tipo YL-83 o FC-37, incluida la placa de medición, por 0,65€ en vendedores  internacionales de Ebay y Aliexpress.</p>
+<p>Ambos modelos, YL-80 y FC-37 se venden en pequeñas variaciones de geometría (más grandes, más pequeños) y de color. Pero más allá de estas diferencias, todas las variantes que veáis son idénticas en comportamiento.</p>
+<p><img src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/sensor-lluvia.webp" alt="sensor-lluvia" loading="lazy" width="400" height="300"></p>
+<h2 id="esquema-montaje">Esquema montaje</h2>
+<p>El esquema eléctrico es sencillo. Conectamos el sensor a la placa de medición. El sensor no tiene polaridad, por lo que puede ser conectada en cualquier sentido.</p>
+<p><img src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/arduino-sensor-conexion.webp" alt="arduino-sensor-conexion" loading="lazy" width="502" height="129"></p>
+<p>Por otro lado, alimentamos la placa de medición conectando los pines GND y 5V a los pines correspondientes de Arduino.</p>
+<div class="schematic pinout diagram" style="--center-width: 180px; --column-gap: 0px;">
+    <div class="column left">
+      <div class="pin"><div class="pin-number pin-power-5v">5V</div><div class="wire red"></div><div class="pin-power-5v">Vcc</div></div>
+      <div class="pin"><div class="pin-number">3V3</div></div>
+      <div class="pin"><div class="pin-number pin-power-gnd pin-small">GND</div><div class="wire black"></div><div class="pin-power-gnd">Gnd</div></div>
+      <div class="pin"></div>
+      <div class="pin"><div class="pin-number">Vin</div></div>
+      <div class="pin"><div class="pin-number">RST</div></div>
+      <div class="pin"><div class="pin-number pin-small">AREF</div></div>	
+      <div class="pin"></div>
+      <div class="pin"><div class="pin-number">A0</div></div>
+      <div class="pin"><div class="pin-number">A1</div></div>
+      <div class="pin"><div class="pin-number">A2</div></div>
+      <div class="pin"><div class="pin-number">A3</div></div>
+      <div class="pin"><div class="pin-number">A4</div></div>
+      <div class="pin"><div class="pin-number">A5</div></div>
+    </div>	
+    <div class="column center">
+        <div class="arduino-diagram">
+        <div class="arduino-diagram--title">ARDUINO</div>
+        <div class="arduino-diagram--power">Power</div>
+        <div class="arduino-diagram--analog">Analog Input</div>
+        <div class="arduino-diagram--digital">Digital Input / Output</div>
+        </div>
+    </div>	
+    <div class="column right">
+      <div class="pin"><div class="pin-number">D13</div></div>
+      <div class="pin"><div class="pin-number">D12</div></div>
+      <div class="pin"><div class="pin-number">D11</div></div>
+      <div class="pin"><div class="pin-number">D10</div></div>
+      <div class="pin"><div class="pin-number pin-digital">D9</div><div class="wire yellow"></div><div class="pin-gpio">DO</div></div>
+      <div class="pin"><div class="pin-number">D8</div></div>
+      <div class="pin"><div class="pin-number">D7</div></div>
+      <div class="pin"><div class="pin-number">D6</div></div>
+      <div class="pin"><div class="pin-number">D5</div></div>
+      <div class="pin"><div class="pin-number">D4</div></div>
+      <div class="pin"><div class="pin-number">D3</div></div>
+      <div class="pin"><div class="pin-number">D2</div></div>
+      <div class="pin"><div class="pin-number">D1</div></div>
+      <div class="pin"><div class="pin-number">D0</div></div>
+    </div>
+  </div>
+  <link rel="stylesheet" href="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/pinout-1.1.0.css">
+<p>Finalmente, conectamos la salida digital del sensor a una entrada digital para leer el estado del sensor, como vimos en la entrada <a href="https://www.luisllamas.es/entradas-digitales-en-arduino/">Entradas digitales en Arduino</a>.</p>
+<p><img src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/arduino-placa-sensor.webp" alt="arduino-placa-sensor" loading="lazy" width="500" height="212"></p>
+<p>Si quisieramos obtener el valor analógico de la medición, conectaríamos la salida analógica del sensor a una entrada analógica de Arduino, aunque como hemos dicho este sensor no dispone de la precisión suficiente para que el valor analógico sea realmente de utilidad.</p>
+<p>Opcionalmente, podemos calibrar el umbral de disparo de la salida digital con el potenciómetro, vertiendo agua en un pequeño experimento. Pero suele ser suficiente con dejar el potenciómetro en un valor medio.</p>
+<h2 id="ejemplos-de-código">Ejemplos de código</h2>
+<p>El código es igualmente sencillo. Simplemente leemos el estado de la <a href="https://www.luisllamas.es/entradas-digitales-en-arduino/">entrada digital</a>. Si el sensor se dispara ejecutamos las acciones necesarias.</p>
+<div class="code-group no-header" data-group="__single_0"><div class="code-group-block" data-tab="0"><pre class="astro-code dark-plus lang-csharp" style="background-color:#111014;color:#D4D4D4; overflow-x: auto;" tabindex="0" data-language="csharp"><code><span class="line"><span style="color:#569CD6">const</span><span style="color:#569CD6"> int</span><span style="color:#9CDCFE"> sensorPin</span><span style="color:#D4D4D4"> = </span><span style="color:#B5CEA8">9</span><span style="color:#D4D4D4">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#569CD6">void</span><span style="color:#DCDCAA"> setup</span><span style="color:#D4D4D4">() {</span></span>
+<span class="line"><span style="color:#9CDCFE">  Serial</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">begin</span><span style="color:#D4D4D4">(</span><span style="color:#B5CEA8">9600</span><span style="color:#D4D4D4">);   </span><span style="color:#6A9955">//iniciar puerto serie</span></span>
+<span class="line"><span style="color:#DCDCAA">  pinMode</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">pin</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">INPUT</span><span style="color:#D4D4D4">);  </span><span style="color:#6A9955">//definir pin como entrada</span></span>
+<span class="line"><span style="color:#D4D4D4">}</span></span>
+<span class="line"><span style="color:#D4D4D4"> </span></span>
+<span class="line"><span style="color:#569CD6">void</span><span style="color:#DCDCAA"> loop</span><span style="color:#D4D4D4">(){</span></span>
+<span class="line"><span style="color:#569CD6">  int</span><span style="color:#9CDCFE"> value</span><span style="color:#D4D4D4"> = </span><span style="color:#B5CEA8">0</span><span style="color:#D4D4D4">;</span></span>
+<span class="line"><span style="color:#9CDCFE">  value</span><span style="color:#D4D4D4"> = </span><span style="color:#DCDCAA">digitalRead</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">sensorPin</span><span style="color:#D4D4D4"> );  </span><span style="color:#6A9955">//lectura digital de pin</span></span>
+<span class="line"><span style="color:#D4D4D4"> </span></span>
+<span class="line"><span style="color:#C586C0">  if</span><span style="color:#D4D4D4"> (</span><span style="color:#9CDCFE">value</span><span style="color:#D4D4D4"> == </span><span style="color:#9CDCFE">LOW</span><span style="color:#D4D4D4">) {</span></span>
+<span class="line"><span style="color:#9CDCFE">      Serial</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">println</span><span style="color:#D4D4D4">(</span><span style="color:#CE9178">"Detectada lluvia"</span><span style="color:#D4D4D4">);</span></span>
+<span class="line"><span style="color:#D4D4D4">  }</span></span>
+<span class="line"><span style="color:#DCDCAA">  delay</span><span style="color:#D4D4D4">(</span><span style="color:#B5CEA8">1000</span><span style="color:#D4D4D4">);</span></span>
+<span class="line"><span style="color:#D4D4D4">}</span></span></code></pre></div><div class="copy-container"><button class="copy-button" title="Copy" aria-label="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button><div class="copy-flash">Copied!</div></div></div>
+<div class="lll-box lll-green lll-tip"><div class="lll-box-content"><p>También podemos leer el estado mediante interrupciones.</p></div></div>
+<lll-ui-related list="" style="display: block; opacity: 1;"><template shadowrootmode="open">
+            <style>
+            :host {
+                display: block;
+                /* LLL-OCEAN Theme Defaults */
+                --lll-box: #283138;
+                --lll-fg: #516375;
+                --lll-strong: #5281b0;
+                
+                --bg-color: color-mix(in srgb, var(--lll-box), transparent 75%);
+                --border-color: var(--lll-box);
+                --text-color: #b5b5b5;
+                --icon-color: var(--lll-fg);
+                --title-color: #e0e0e0;
+                --item-title-color: #d0d0d0;
+                --card-desc-color: var(--text-color);
+                --btn-bg: #2196f3;
+                --btn-hover: #1e88e5;
+                --btn-gray-bg: #25282e;
+                --btn-gray-color: #ccc;
+                --btn-gray-border: #333;
+                --btn-gray-hover-bg: #333;
+                --btn-gray-hover-color: #fff;
+                --btn-gray-hover-border: #555;
+                --border-light: rgba(255,255,255,0.05);
+                --hover-bg: color-mix(in srgb, var(--lll-box), transparent 60%);
+                --hover-border-color: var(--lll-box);
+            }
+
+            :host-context(html[data-theme=light]) {
+                --lll-box: #ffffff;
+                --lll-fg: #333333;
+                --lll-strong: #007acc;
+                
+                --bg-color: rgba(255, 255, 255, 0.27);
+                --border-color: #e0e0e0;
+                --text-color: #333333;
+                --icon-color: #666666;
+                --title-color: #333333;
+                --item-title-color: #222222;
+                --card-desc-color: #555555;
+                --btn-bg: #007acc;
+                --btn-hover: #005999;
+                --btn-gray-bg: #f5f5f5;
+                --btn-gray-color: #333333;
+                --btn-gray-border: #cccccc;
+                --btn-gray-hover-bg: #e0e0e0;
+                --btn-gray-hover-color: #000000;
+                --btn-gray-hover-border: #999999;
+                --border-light: rgba(0,0,0,0.05);
+                --hover-bg: rgba(0,0,0,0.03);
+                --hover-border-color: rgba(0,0,0,0.1);
+            }
+            
+            .st-card group {
+                margin: 1rem auto;
+                max-width: 750px;
+            }
+            a { text-decoration: none; color: inherit; }
+
+            /* --- CARD BASE --- */
+            .st-card {
+                margin: 2rem auto;
+                background: var(--bg-color);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                position: relative;
+                overflow: hidden;
+                box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 12px -5px;
+                transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            }
+
+            .st-card.standalone:hover {
+                background: var(--hover-bg);
+                border-color: var(--hover-border-color);
+     
+            }
+
+            .st-card.standalone:hover .st-card-title {
+                    color: var(--lll-strong) !important;
+            }
+
+            .st-card strong,
+            .st-item strong {
+                color:var(--lll-strong) !important;
+            }
+
+             /* --- GROUP HEADER --- */
+            .st-header {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 8px 12px;
+                background: color-mix(in srgb, var(--lll-box), transparent 60%);
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .st-title {
+                font-weight: 600;
+                font-size: 1rem;
+                color: var(--title-color);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .st-icon {
+                color: var(--icon-color);
+                width: 25px;
+                height: 25px;
+                transform: rotate(-45deg);
+            }
+
+            /* --- GROUP LIST ITEMS --- */
+            .st-list {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .st-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 16px;
+                border-bottom: 1px solid var(--border-light);
+                transition: background 0.2s;
+                gap: 15px;
+            }
+
+        
+            .st-item:last-child { border-bottom: none; }
+            .st-item:hover { background: var(--hover-bg); color: var(--lll-strong) !important;}
+
+            .st-item:hover .st-item-title  {
+                color: var(--lll-strong) !important;
+            }
+
+            .st-item-content { flex: 1; }
+            
+            .st-item-title {
+                color: var(--item-title-color);
+                font-weight: 400;
+                font-size: .85em;
+                margin-bottom: 2px;
+            }
+
+            .st-item-desc {
+                color: var(--text-color);
+                font-size: 0.85rem;
+            }
+
+            /* --- STANDALONE CARD --- */
+            .st-standalone-link {
+                display: flex;
+                align-items: center;
+                padding: 14px 16px;
+                gap: 16px;
+            }
+
+            .st-content {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                flex: 1;
+            }
+
+            .st-thumb {
+                width: 60px;
+                height: 60px;
+                flex-shrink: 0;
+                border-radius: 6px;
+                overflow: hidden;
+            }
+            
+            .st-thumb img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            .st-icon-large {
+                width: 2rem;
+                height: 2rem;
+                color: var(--icon-color);
+                flex-shrink: 0;
+                transform: rotate(-45deg);
+            }
+            .st-icon-large svg { width: 100%; height: 100%; }
+
+            .st-info { flex: 1; }
+
+            .st-card-title {
+                font-size: 1em;
+                font-weight: 600;
+                color: var(--title-color);
+                margin-bottom: 4px;
+            }
+
+            .st-card-desc {
+                color: var(--text-color);
+                font-size: 0.9em;
+                line-height: 1.2;
+                margin: 0;
+            }
+
+            /* --- BUTTONS --- */
+            .st-btn {
+                padding: 8px 16px;
+                border-radius: 4px;
+                font-size: 0.85rem;
+                font-weight: 600;
+                white-space: nowrap;
+                text-align: center;
+                border: none;
+                cursor: pointer;
+                transition: all 0.2s;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                flex-shrink: 0;
+                line-height: 1.5;
+                /* Blue Style (Default for Standalone) */
+                background: var(--btn-bg);
+                color: #fff;
+            }
+            .st-btn:hover { background: var(--btn-hover); }
+
+            .st-btn-gray {
+                /* background: #25282e;
+                color: #ccc;
+                border: 1px solid #333;
+                font-size: 0.75rem; */
+                padding: 4px 14px;
+            }
+            /* .st-btn-gray:hover { 
+                background: #333; 
+                color: #fff;
+                border-color: #555;
+            } */
+
+
+            .st-card-desc p {
+                font-size: 1em;
+                margin: .3rem;
+                margin-left: 0;
+                line-height: 1.5;
+            }
+
+            .st-card-desc  em {
+                color: #635e5e !important;
+                font-style: normal;
+                }
+
+            .st-card-desc  strong em,
+            .st-card-desc  em strong {
+            color: var(--accent-strong-color) !important;
+            font-style: normal;
+            }
+
+            /* --- RESPONSIVE --- */
+            @media (max-width: 600px) {
+                .st-standalone-link {
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                    gap: 12px;
+                }
+                .st-thumb { width: 80px; height: 80px; }
+                .st-btn { width: auto; text-align: center; padding: 6px 12px; }
+                .st-icon-large { margin-bottom: 5px; }
+            }
+        </style>
+            <div class="st-card group">
+                <div class="st-header">
+                    <div class="st-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg></div>
+                    <span class="st-title">Si quieres aprender más</span>
+                </div>
+
+                <div class="st-list">
+                    
+                        <a href="https://www.luisllamas.es/que-son-y-como-usar-interrupciones-en-arduino/" class="st-item">
+                            <div class="st-item-content">
+                                <div class="st-item-title">Qué son y cómo usar interrupciones en Arduino</div>
+                                
+                            </div>
+                            <div class="st-btn st-btn-gray">
+                                Leer
+                            </div>
+                        </a>
+                    
+                        <a href="https://www.luisllamas.es/debounce-interrupciones-arduino/" class="st-item">
+                            <div class="st-item-content">
+                                <div class="st-item-title">Leer un pulsador con interrupciones en Arduino</div>
+                                
+                            </div>
+                            <div class="st-btn st-btn-gray">
+                                Leer
+                            </div>
+                        </a>
+                    
+                </div>
+            </div>
+        </template><ul>
+<li><a href="https://www.luisllamas.es/que-son-y-como-usar-interrupciones-en-arduino/">Qué son y cómo usar interrupciones en Arduino</a></li>
+<li><a href="https://www.luisllamas.es/debounce-interrupciones-arduino/">Leer un pulsador con interrupciones en Arduino</a></li>
+</ul></lll-ui-related>
+<h2 id="descarga-el-código">Descarga el código</h2>
+<p>Todo el código de esta entrada está disponible para su descarga en Github.
+<a href="https://github.com/luisllamasbinaburo/codigo-tutoriales-luisllamas_es"><img src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/github-full.svg" alt="github-full" loading="lazy" width="358" height="120"></a></p> </div> <!-- <Ads1Script></Ads1Script>
+      <Ads2></Ads2> --> <nav class="articletags" aria-label="etiquetas">
+Temas:
+<ul> <li><a href="https://www.luisllamas.es/tag/sensores/" title="Ver todas las entradas en el tema Sensores" rel="tag">Sensores</a></li><li><a href="https://www.luisllamas.es/tag/humedad/" title="Ver todas las entradas en el tema Humedad" rel="tag">Humedad</a></li><li><a href="https://www.luisllamas.es/tag/liquidos/" title="Ver todas las entradas en el tema Liquidos" rel="tag">Liquidos</a></li><li><a href="https://www.luisllamas.es/tag/agua/" title="Ver todas las entradas en el tema Agua" rel="tag">Agua</a></li> </ul> </nav> <nav class="navnextprev" aria-label="botones siguiente y anterior"> <div class="navprevnext-inner"> <div> <img src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/arduino-dispositivos-icon.svg" height="32" width="32" itemprop="image" loading="lazy"> <p>Arduino y dipositivos</p> </div> <a class="outline-home" href="https://www.luisllamas.es/curso-arduino-intermedio/"> <svg role="img"><use href="/img/icon_globals_v6.0.0.svg#home"></use></svg>
+Ir al índice
+</a> </div> <div class="navprevnext-buttons"> <a class="card navprev shine-effect" href="https://www.luisllamas.es/medir-calidad-del-aire-y-co2-con-ccs811-y-arduino/" title="Medir calidad del aire y CO2 con CCS811 y Arduino"> <svg class="icon" role="img"><use href="/img/icon_globals_v6.0.0.svg#chevron"></use></svg> <span>Anterior</span> <small>Medir calidad del aire y CO2 con CCS811 y Arduino</small> </a> <a class="card navnext shine-effect" href="https://www.luisllamas.es/arduino-humedad-suelo-fc-28/" title="Medir la humedad del suelo con Arduino e higrómetro FC-28"> <svg class="icon" role="img"><use href="/img/icon_globals_v6.0.0.svg#chevron"></use></svg> <span>Siguiente</span> <small>Medir la humedad del suelo con Arduino e higrómetro FC-28</small> </a> </div> </nav>  <meta itemprop="datePublished" content="2016-02-13T19:19:03.000Z"> <meta itemprop="dateModified" content="2016-02-13T19:19:03.000Z"> <meta itemprop="author" content="LuisLlamas"> <meta content="" itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="https://www.luisllamas.es/arduino-lluvia/"> </article> <div class="sidebar-right" data-sticky="true" data-top-gap="60px" style="position: sticky; top: 60px; height: fit-content;"> <div class="sidebar-widget over-hidden">  <div> <svg class="icon" role="img"><use href="/img/icon_globals_v6.0.0.svg#toc"></use></svg> <p>En esta página</p> </div>   <nav class="toc">  <ul class="highlight-links"> <li> <a href="https://www.luisllamas.es/arduino-lluvia/#qu%C3%A9-es-un-sensor-de-lluvia" class="active">¿Qué es un sensor de lluvia?</a>  </li><li> <a href="https://www.luisllamas.es/arduino-lluvia/#precio" class="">Precio</a>  </li><li> <a href="https://www.luisllamas.es/arduino-lluvia/#esquema-montaje" class="">Esquema montaje</a>  </li><li> <a href="https://www.luisllamas.es/arduino-lluvia/#ejemplos-de-c%C3%B3digo" class="">Ejemplos de código</a>  </li><li> <a href="https://www.luisllamas.es/arduino-lluvia/#descarga-el-c%C3%B3digo" class="">Descarga el código</a>  </li> </ul> </nav>  </div> </div>  </div> </div> <script src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/article-7.0.0.js.descarga" type="module" async=""></script>  </main> <footer itemscope="" itemtype="https://schema.org/WPFooter"> <div class="mainfooter"> <div> <div class="footerlogo-container" itemscope="" itemtype="https://schema.org/Organization"> <img class="footerlogo-image" width="64" height="64" alt="LuisLlamas Logo" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/lll_icon_v2_64x64.png"> <a href="https://www.luisllamas.es/" itemprop="url"> <p itemprop="name">Luis Llamas</p> <p itemprop="description">Ingeniería, informática y diseño</p> </a> </div> </div> <div> <p>
+Excepto notación expresa, los contenidos de este sitio se ofrecen bajo
+      licencia Creative Commons License BY-NC-SA.
+</p> <img class="creative-img" aria-label="creative commons license" alt="creative-commons-license" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/creative-commons.svg" width="150" height="50"> </div> <div> <div class="sidebarsocial"> <a href="https://github.com/luisllamasbinaburo/" title="github" class="social-icon github" rel="author"> <svg role="img" class="social-svg"> <use href="/img/icon_globals_v6.0.0.svg#github"></use> </svg> </a> <a href="https://bsky.app/profile/luisllamas.bsky.social" title="Blusky" class="social-icon blusky" rel="author"> <svg role="img" class="social-svg"> <use href="/img/icon_globals_v6.0.0.svg#blusky"></use> </svg> </a> <a href="https://twitter.com/LuisLlamas/" title="twitter" class="social-icon twitter" rel="author"> <svg role="img" class="social-svg"> <use href="/img/icon_globals_v6.0.0.svg#twitter"></use> </svg> </a> <a href="https://www.linkedin.com/in/luisllamasbinaburo/" title="linkedin" class="social-icon linkedin" rel="author"> <svg role="img" class="social-svg"> <use href="/img/icon_globals_v6.0.0.svg#linkedin"></use> </svg> </a> <a href="https://www.youtube.com/c/LuisllamasEs/" title="youtube" class="social-icon youtube" rel="author"> <svg role="img" class="social-svg"> <use href="/img/icon_globals_v6.0.0.svg#youtube"></use> </svg> </a> </div> <div class="sidebardiscord"> <a href="https://discord.com/invite/mSGV5hnxtK/" title="discord-link" rel="author"> <img width="200" height="80" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/discord.svg" alt="discord-logo"> </a> </div> </div> </div> <div class="bottombar"> <div> <span>Copyright ©2026. Todos los derechos reservados</span> </div> </div> </footer> <dialog id="search-dialog" class="hidden"> <search id="site-search-container" class="loading"> <form id="site-search" role="search" autocomplete="off" data-sourcedata="/search_5.0.0.json"> <fieldset> <div id="sitesearch-inner" class="sitesearch-inner"> <input id="site-search-query" type="text" name="q" placeholder="Busca un tema..." spellcheck="false" autocomplete="off"> <svg role="img" class="icon"><use href="/img/icon_globals_v6.0.0.svg#search"></use> </svg> <button class="search-close" type="button" aria-label="button-menu"></button> </div> </fieldset> </form> <div id="site-search-results-container"> <div id="site-search-results"></div> </div> </search> </dialog> <div class="background"> <picture> <source srcset="/img/cover/electronica.avif" type="image/avif"> <source srcset="/img/cover/electronica.webp" type="image/webp"> <img src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/electronica.webp" alt="" fetchpriority="high" width="1600" height="900" style="opacity: 0.6;"> </picture> </div> <button id="back-to-top" class="collapsed" aria-label="boton volver arriba">▲</button>  <script type="module" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/main-7.0.0.js.descarga"></script><script type="module" src="./Detector de lluvia con Arduino y sensor FC-37 o YL-83_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;d4fb448b7b83405ea09af01ca63d9a10&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+ </body></html>
