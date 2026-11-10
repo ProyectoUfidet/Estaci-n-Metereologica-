@@ -1,6 +1,6 @@
-# Estación meteorológica UFIDET
+# Estación meteorológica e invernadero inteligente · I.E.S 6036
 
-Página de presentación en español, adaptable a celulares y computadoras. Incluye la propuesta, componentes, imágenes de referencia y enlaces a documentos y piezas STL del repositorio. No muestra mediciones en vivo.
+Página de presentación en español, adaptable a celulares y computadoras. Incluye el proyecto de estación meteorológica y anemómetro, el invernadero inteligente ESP32-LoRa, sus componentes, montaje, automatizaciones, pruebas y documentación técnica. No muestra mediciones en vivo.
 
 ## Ver la página
 
